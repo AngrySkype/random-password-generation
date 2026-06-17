@@ -10,7 +10,7 @@ def random_pass(length):
     num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     special = ['@', '#', '$', '%', '&', '*']
 
-    all = lower + upper + num + special
+    all = (lower + upper + num + special)
     
     return "".join(random.choices(all, k=length))
 
@@ -34,7 +34,7 @@ def main():
 
     with dpg.window(tag="f"):
         dpg.add_text("random password generator")
-        dpg.add_slider_int(label="words",default_value=0.1,max_value=128, callback=on_slider_change,tag="length_slider")
+        dpg.add_slider_int(label="words",default_value=1,max_value=128, callback=on_slider_change,tag="length_slider")
         dpg.add_input_text(label="result",callback=result,tag="result_input")        
         dpg.add_button(label="Copy", callback=button_callback)
 
