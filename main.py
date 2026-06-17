@@ -10,7 +10,7 @@ def random_pass(length):
     num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     special = ['@', '#', '$', '%', '&', '*']
 
-    all = (lower + upper + num + special)
+    all = lower + upper + num + special
     
     return "".join(random.choices(all, k=length))
 
