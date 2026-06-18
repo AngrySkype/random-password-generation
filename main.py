@@ -29,7 +29,7 @@ def random_words(length):
         chars += special
 
     if not chars:
-        return
+        return "Minimum one checkbox needed !"
 
     return "".join(random.choice(chars) for _ in range(length))
 
