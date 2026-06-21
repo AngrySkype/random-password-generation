@@ -9,7 +9,6 @@ random_number = ""
 preset = ["Normal", "Strong", "Very Strong"]
 password_strength = ["Weak","Strong","Very Strong",""]
 
-
 lower = ["a", "b", "c", "d", "e", "f"]
 upper = ["A", "B", "C", "D", "E", "F"]
 number = ["0", "1", "2", "3", "4", "5", "6"]
@@ -60,16 +59,17 @@ def preset_callback(sender, app_data):
     dpg.set_value("special", app_data in ["Very Strong"])
     random_callback(sender,app_data)
 
-
 def main():
     with dpg.window(tag="f"):
         dpg.add_text("Simple password generator")
         dpg.add_slider_int(label="Words",min_value=1,max_value=128, callback=slider_callback, tag="slider")
-        dpg.add_input_text(label="Result", callback=input_callback,tag="result")
+        dpg.add_input_text(label="Result", callback=input_callback,tag="result",readonly=True)
 
         with dpg.group(horizontal=True):
             dpg.add_button(label="Copy", callback=button_callback)
-            dpg.add_button(label="Random", callback=random_callback)
+            dpg.add_button(label="Random", callback=random_callback, tag="random")
+            with dpg.tooltip("random"):
+                dpg.add_text("Randomize current length password")
             dpg.add_combo(label="Select preset", items=preset, callback=preset_callback,tag="preset")
 
         with dpg.group(horizontal=True):
