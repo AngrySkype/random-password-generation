@@ -2,8 +2,8 @@ import dearpygui.dearpygui as dpg
 import pyperclip
 import secrets
 import string
-dpg.create_context()
 
+dpg.create_context()
 
 preset = ["Normal", "Strong", "Very Strong"]
 
@@ -39,12 +39,10 @@ def slider_callback(sender, app_data):
     dpg.set_value("result", value=random_number)
 
 def button_callback(sender, app_data):
-    x = dpg.get_value("result")
-    pyperclip.copy(x)
+    pyperclip.copy(dpg.get_value("result"))
 
 def random_callback(sender, app_data):
-    length = dpg.get_value("slider")
-    dpg.set_value("result", random_words(length))
+    dpg.set_value("result", random_words(dpg.get_value("slider")))
 
 def preset_callback(sender, app_data):
     dpg.set_value("lower", app_data in ["Normal", "Strong", "Very Strong"])
