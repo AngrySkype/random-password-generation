@@ -54,8 +54,16 @@ def preset_callback(sender, app_data):
 def main():
     with dpg.window(tag="f"):
         dpg.add_text("Simple password generator")
+        dpg.add_text("Version 1.1.0")
         dpg.add_slider_int(label="Words",min_value=1,max_value=128, callback=slider_callback, tag="slider")
-        dpg.add_input_text(label="Result",tag="result",readonly=True)
+        dpg.add_input_text(label="Result",tag="result",readonly=True, password=False)
+        with dpg.menu_bar():
+            with dpg.menu(label="Settings"):
+                    with dpg.menu(label="Window"):
+                        dpg.add_checkbox(label="Topmost", tag="topmost", callback=lambda s, a: (dpg.set_viewport_always_top(a)))
+                        # dpg.add_checkbox(label="Settings saved between launches") soon
+                    with dpg.menu(label="Password"):
+                        dpg.add_checkbox(label="Hide password", tag="hide", callback=lambda s, a: dpg.configure_item("result", password=True if a else False))
 
         with dpg.group(horizontal=True):
             dpg.add_button(label="Copy", callback=button_callback)
@@ -70,12 +78,14 @@ def main():
             dpg.add_checkbox(label="Numbers", tag="number")
             dpg.add_checkbox(label="Special", tag="special")
 
-    dpg.create_viewport(title='Simple password generator', width=600, height=200)
+    dpg.create_viewport(title='Simple password generator', width=600, height=200, always_on_top=False)
     dpg.setup_dearpygui()
     dpg.show_viewport()
     dpg.set_primary_window("f", True)
     dpg.start_dearpygui()
     dpg.destroy_context()
+    
 
 if __name__ == "__main__":
     main()
+    
